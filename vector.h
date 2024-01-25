@@ -9,16 +9,25 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-
 /**
  * @struct Vector3
  * @brief Represents a 3D vector with x, y, and z components.
  */
 typedef struct Vector3 {
-    double x;
-    double y;
-    double z;
+  double x;
+  double y;
+  double z;
 } Vector3;
+
+/**
+ * Creates a new Vector3 object with the specified coordinates.
+ *
+ * @param x The x-coordinate of the vector.
+ * @param y The y-coordinate of the vector.
+ * @param z The z-coordinate of the vector.
+ * @return The newly created Vector3 object.
+ */
+Vector3 vec3_new(double x, double y, double z);
 
 /**
  * Calculates the magnitude of a 3D vector.
@@ -33,15 +42,17 @@ double vec3_magnitude(Vector3 v);
  *
  * This function normalizes a given 3D vector, making its length equal to 1.
  *
- * @param v Pointer to the Vector3 structure representing the vector to be normalized.
+ * @param v Pointer to the Vector3 structure representing the vector to be
+ * normalized.
  */
 void vec3_normalize(Vector3 *v);
 
 /**
  * Normalizes a Vector3.
  *
- * This function takes a Vector3 as input and returns a normalized version of it.
- * The normalized vector has the same direction as the original vector, but its length is 1.
+ * This function takes a Vector3 as input and returns a normalized version of
+ * it. The normalized vector has the same direction as the original vector, but
+ * its length is 1.
  *
  * @param v The Vector3 to be normalized.
  * @return The normalized Vector3.
@@ -93,14 +104,27 @@ Vector3 vec3_div(Vector3 a, Vector3 b);
 Vector3 vec3_scale(double scale);
 
 /**
+ * Creates a list of Vector3 objects.
+ *
+ * This function takes arrays of x, y, and z coordinates and creates a list of
+ * Vector3 objects.
+ *
+ * @param x An array of x coordinates.
+ * @param y An array of y coordinates.
+ * @param z An array of z coordinates.
+ * @param n The number of elements in the arrays.
+ * @return A pointer to the created list of Vector3 objects.
+ */
+Vector3 *vec3_create_list(double x[], double y[], double z[], int n);
+
+/**
  * @struct Vector2
  * @brief Represents a 2D vector with x and y components.
  */
 typedef struct Vector2 {
-    double x; 
-    double y; 
+  double x;
+  double y;
 } Vector2;
-
 
 /**
  * Calculates the magnitude of a 2D vector.
@@ -165,12 +189,12 @@ Vector2 vec2_div(Vector2 a, Vector2 b);
 /**
  * @brief Scales a 2D vector by a given scale factor.
  *
- * This function multiplies both the x and y components of the vector by the given scale factor.
+ * This function multiplies both the x and y components of the vector by the
+ * given scale factor.
  *
  * @param scale The scale factor to multiply the vector by.
  * @return The scaled vector.
  */
 Vector2 vec2_scale(Vector2 v, double scale);
-
 
 #endif
