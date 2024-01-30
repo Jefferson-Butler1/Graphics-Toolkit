@@ -2,6 +2,8 @@
 #ifndef NAMING_ALIASES
 #define NAMING_ALIASES
 #include "M3d_matrix_tools.c"
+#include "vector.h"
+#include <stdarg.h>
 
 // Utils
 int printMatrix (double a  [4][4]) { return M3d_print_mat(a); }
@@ -11,5 +13,7 @@ int makeIdentity(double a  [4][4]) { return M3d_make_identity(a); }
 
 //Transformations
 
+
+//Drawing
 
 #endif
