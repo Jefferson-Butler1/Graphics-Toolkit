@@ -117,6 +117,12 @@ typedef struct Vector2 {
     double y; 
 } Vector2;
 
+/**
+ * Prints the components of a 2D vector.
+ *
+ * @param v The vector to be printed.
+ */
+void vec2_print(Vector2 v);
 
 /**
  * Calculates the magnitude of a 2D vector.

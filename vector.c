@@ -71,6 +71,10 @@ Vector3 vec3_cross_prod(Vector3 a, Vector3 b){
 
 /* 2D Vector Functions */
 
+void vec2_print(Vector2 v){
+    printf("<%lf, %lf>\n", v.x, v.y);
+}
+
 double vec2_magnitude(Vector2 v){
     return sqrt(pow(v.x, 2) + pow(v.y, 2));
 }
