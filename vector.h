@@ -21,6 +21,13 @@ typedef struct Vector3 {
 } Vector3;
 
 /**
+ * Prints the components of a Vector3.
+ *
+ * @param v The Vector3 to be printed.
+ */
+void vec3_print(Vector3 v);
+
+/**
  * Calculates the magnitude of a 3D vector.
  *
  * @param v The vector for which to calculate the magnitude.
@@ -91,6 +98,15 @@ Vector3 vec3_div(Vector3 a, Vector3 b);
  * @return The scaled Vector3.
  */
 Vector3 vec3_scale(double scale);
+
+/**
+ * Calculates the cross product of two 3D vectors.
+ *
+ * @param a The first vector.
+ * @param b The second vector.
+ * @return The cross product of the two vectors.
+ */
+Vector3 vec3_cross_prod(Vector3 a, Vector3 b);
 
 /**
  * @struct Vector2

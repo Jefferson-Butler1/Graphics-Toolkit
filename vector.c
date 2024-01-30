@@ -4,6 +4,11 @@
 
 
 /* 3D Vector Functions */
+
+void vec3_print(Vector3 v){
+    printf("<%lf, %lf, %lf>\n", v.x, v.y, v.z);
+}
+
 double vec3_magnitude(Vector3 v){
     return sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2));
 }
@@ -53,6 +58,14 @@ Vector3 vec3_div(Vector3 a, Vector3 b){
     result.x = a.x / b.x;
     result.y = a.y / b.y;
     result.z = a.z / b.z;
+    return result;
+}
+
+Vector3 vec3_cross_prod(Vector3 a, Vector3 b){
+    Vector3 result;
+    result.x = (a.y * b.z) - (b.y * a.z);
+    result.y = (a.x * b.z) - (b.x * a.z);
+    result.z = (a.x * b.y) - (b.x * a.y);
     return result;
 }
 
