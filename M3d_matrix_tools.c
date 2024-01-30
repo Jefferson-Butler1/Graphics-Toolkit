@@ -448,5 +448,7 @@ void M3d_make_movement_sequence_matrix(double out[4][4], double out_inverted[4][
 		M3d_mat_mult(inverse_result, inverse_result, inverse_mat);
 	}
 	M3d_copy_mat(out, result);
-	M3d_copy_mat(out_inverted, inverse_result);
+	if(out_inverted != NULL){
+		M3d_copy_mat(out_inverted, inverse_result);
+	}
 }
