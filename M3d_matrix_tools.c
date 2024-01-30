@@ -295,9 +295,9 @@ int M3d_x_product(double res[3], double a[3], double b[3])
   double r[3];
   int v;
 
-  r[0] = a[1] * b[2] - b[1] * a[2];
-  r[1] = b[0] * a[2] - a[0] * b[2];
-  r[2] = a[0] * b[1] - b[0] * a[1];
+  r[0] = a[1] * b[2] - b[1] * a[2];  // a.y * b.z - b.y * a.z
+  r[1] = b[0] * a[2] - a[0] * b[2];  // a.x * b.z - b.x * a.z
+  r[2] = a[0] * b[1] - b[0] * a[1];  // a.x * b.y - b.x * a.y
 
   res[0] = r[0];
   res[1] = r[1];
@@ -436,7 +436,9 @@ void M3d_make_movement_sequence_matrix(double out[4][4],
     M3d_mat_mult(inverse_result, inverse_result, inverse_mat);
   }
   M3d_copy_mat(out, result);
-  M3d_copy_mat(out_inverted, inverse_result);
+  if (out_inverted != NULL) {
+    M3d_copy_mat(out_inverted, inverse_result);
+  }
 }
 
 #endif

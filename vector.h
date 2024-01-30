@@ -20,6 +20,13 @@ typedef struct Vector3 {
 } Vector3;
 
 /**
+ * Prints the components of a Vector3.
+ *
+ * @param v The Vector3 to be printed.
+ */
+void vec3_print(Vector3 v);
+
+/**
  * Creates a new Vector3 object with the specified coordinates.
  *
  * @param x The x-coordinate of the vector.
@@ -104,6 +111,15 @@ Vector3 vec3_div(Vector3 a, Vector3 b);
 Vector3 vec3_scale(double scale);
 
 /**
+ * Calculates the cross product of two 3D vectors.
+ *
+ * @param a The first vector.
+ * @param b The second vector.
+ * @return The cross product of the two vectors.
+ */
+Vector3 vec3_cross_prod(Vector3 a, Vector3 b);
+
+/**
  * Creates a list of Vector3 objects.
  *
  * This function takes arrays of x, y, and z coordinates and creates a list of
@@ -125,6 +141,13 @@ typedef struct Vector2 {
   double x;
   double y;
 } Vector2;
+
+/**
+ * Prints the components of a 2D vector.
+ *
+ * @param v The vector to be printed.
+ */
+void vec2_print(Vector2 v);
 
 /**
  * Calculates the magnitude of a 2D vector.
