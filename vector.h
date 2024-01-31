@@ -94,10 +94,11 @@ Vector3 vec3_div(Vector3 a, Vector3 b);
 /**
  * Scales a Vector3 by a given scale factor.
  *
- * @param scale The scale factor to multiply the Vector3 by.
+ * @param v The Vector3 to be scaled.
+ * @param scale The scale factor.
  * @return The scaled Vector3.
  */
-Vector3 vec3_scale(double scale);
+Vector3 vec3_scale(Vector3 v, double scale);
 
 /**
  * Calculates the dot product of a 3D vector.

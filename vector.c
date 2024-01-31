@@ -61,6 +61,14 @@ Vector3 vec3_div(Vector3 a, Vector3 b){
     return result;
 }
 
+Vector3 vec3_scale(Vector3 v, double scale){
+    Vector3 result;
+    result.x = v.x * scale;
+    result.y = v.y * scale;
+    result.z = v.z * scale;
+    return result;
+}
+
 double vec3_dot_prod(Vector3 a, Vector3 b){
     return (a.x * b.x) + (a.y * b.y) + (a.z + b.z);
 }
