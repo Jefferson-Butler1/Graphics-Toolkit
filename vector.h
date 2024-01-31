@@ -100,6 +100,14 @@ Vector3 vec3_div(Vector3 a, Vector3 b);
 Vector3 vec3_scale(double scale);
 
 /**
+ * Calculates the dot product of a 3D vector.
+ *
+ * @param v The vector for which to calculate the dot product.
+ * @return The dot product of the vector.
+ */
+double vec3_dot_prod(Vector3 a, Vector3 b);
+
+/**
  * Calculates the cross product of two 3D vectors.
  *
  * @param a The first vector.
@@ -193,6 +201,14 @@ Vector2 vec2_div(Vector2 a, Vector2 b);
  * @return The scaled vector.
  */
 Vector2 vec2_scale(Vector2 v, double scale);
+
+/**
+ * Calculates the dot product of a 2D vector.
+ *
+ * @param v The 2D vector.
+ * @return The dot product of the vector.
+ */
+double vec2_dot_prod(Vector2 a, Vector2 b);
 
 
 #endif
