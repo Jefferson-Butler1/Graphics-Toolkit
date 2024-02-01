@@ -222,7 +222,7 @@ int M3d_mat_mult(double res[4][4], double a[4][4], double b[4][4])
 /**
  * Multiplies a 3D point by a 4x4 matrix.
  *
- * This function multiplies a 3D point Q by a 4x4 matrix m and stores the result in P.
+ * This function multiplies a 3D point Q by a 4x4 matrix m and stores the result in P. SAFE, user may make a call like M3d_mat_mult_pt (W, m,W) ;
  *
  * @param P The resulting 3D point after multiplication.
  * @param m The 4x4 matrix.
@@ -451,4 +451,15 @@ void M3d_make_movement_sequence_matrix(double out[4][4], double out_inverted[4][
 	if(out_inverted != NULL){
 		M3d_copy_mat(out_inverted, inverse_result);
 	}
+
+}
+
+void M3d_view(double v[4][4], double vi[4][4],  double eyeA[3], double coiA[3], double upA[3]){
+	double mat[4][4];
+	M3d_make_identity(mat);
+	M3d_make_translation(mat, -eyeA[0], -eyeA[1], -eyeA[2]);
+	M3d_mat_mult_pt(coiA, mat, coiA);
+
+	double hypotonuse = sqrt(pow(coiA[0], 2) + pow(coiA[2], 2));
+	/* TODO: Finish this */
 }
