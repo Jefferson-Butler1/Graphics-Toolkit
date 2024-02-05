@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <math.h>
 
+/* More intuitive indices for vectors */
+#define Xi 0 
+#define Yi 1
+#define Zi 2
+
 /*
 
  ( x')          (x)
@@ -454,12 +459,65 @@ void M3d_make_movement_sequence_matrix(double out[4][4], double out_inverted[4][
 
 }
 
+double magnitude(double v[3]){
+	return sqrt(pow(v[Xi], 2) + pow(v[Yi], 2) + pow(v[Zi], 2));
+}
+
 void M3d_view(double v[4][4], double vi[4][4],  double eyeA[3], double coiA[3], double upA[3]){
 	double mat[4][4];
-	M3d_make_identity(mat);
+	double mat_inverted[4][4];
+	double temp_mat[4][4];
+	double new_coi[3];
+	
+	// Translate to origin
 	M3d_make_translation(mat, -eyeA[0], -eyeA[1], -eyeA[2]);
-	M3d_mat_mult_pt(coiA, mat, coiA);
+	M3d_make_translation(mat_inverted, eyeA[0], eyeA[1], eyeA[2]);
+	M3d_mat_mult_pt(new_coi, mat, coiA);
 
-	double hypotonuse = sqrt(pow(coiA[0], 2) + pow(coiA[2], 2));
-	/* TODO: Finish this */
-}
+	// Rotate to be aligned with Y, Z plane
+	double hypotonuse = sqrt(pow(new_coi[0], 2) + pow(new_coi[2], 2));
+	double sn = new_coi[Xi] / hypotonuse;
+	double cs = new_coi[Zi] / hypotonuse;
+	
+	M3d_make_y_rotation_cs(temp_mat, cs, -sn); //? Don't really understand why sin is negative for this one only	
+	M3d_mat_mult(mat, temp_mat, mat);
+
+	//inverse
+	M3d_make_y_rotation_cs(temp_mat, cs, sn);
+	M3d_mat_mult(mat_inverted, mat_inverted, temp_mat); //opposite order
+
+
+	// Rotate to that coi is aligned along positive Z axis (rotation on Y, Z plane)
+	M3d_mat_mult_pt(new_coi, mat, coiA); // move coi into Y, Z plane
+	
+	hypotonuse = sqrt(pow(new_coi[Zi], 2) + pow(new_coi[Yi], 2));
+	sn = new_coi[Yi] / hypotonuse;
+	cs = new_coi[Zi] / hypotonuse;
+
+	M3d_make_x_rotation_cs(temp_mat, cs, sn);
+	M3d_mat_mult(mat, temp_mat, mat);
+
+	//inverse
+	M3d_make_x_rotation_cs(temp_mat, cs, -sn);
+	M3d_mat_mult(mat_inverted, mat_inverted, temp_mat);
+
+	M3d_mat_mult_pt(new_coi, mat, coiA);
+
+	//Rotate so that up is aligned with positive Y axis
+	double new_up[3];
+	M3d_mat_mult_pt(new_up, mat, upA);
+	
+	hypotonuse = sqrt(pow(new_up[Xi], 2) + pow(new_up[Yi], 2));
+	sn = new_up[Xi] / hypotonuse;
+	cs = new_up[Yi] / hypotonuse;
+
+	M3d_make_z_rotation_cs(temp_mat, cs, sn);
+	M3d_mat_mult(mat, temp_mat, mat);
+
+	//inverse
+	M3d_make_z_rotation_cs(temp_mat, cs, -sn);
+	M3d_mat_mult(mat_inverted, mat_inverted, temp_mat);
+
+	M3d_copy_mat(v, mat);
+	M3d_copy_mat(vi, mat_inverted);
+};
