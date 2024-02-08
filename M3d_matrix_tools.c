@@ -475,7 +475,7 @@ void M3d_view(double v[4][4], double vi[4][4],  double eyeA[3], double coiA[3], 
 	M3d_mat_mult_pt(new_coi, mat, coiA);
 
 	// Rotate to be aligned with Y, Z plane
-	double hypotonuse = sqrt(pow(new_coi[0], 2) + pow(new_coi[2], 2));
+	double hypotonuse = sqrt(pow(new_coi[Xi], 2) + pow(new_coi[Zi], 2));
 	double sn = new_coi[Xi] / hypotonuse;
 	double cs = new_coi[Zi] / hypotonuse;
 	
@@ -519,5 +519,38 @@ void M3d_view(double v[4][4], double vi[4][4],  double eyeA[3], double coiA[3], 
 	M3d_mat_mult(mat_inverted, mat_inverted, temp_mat);
 
 	M3d_copy_mat(v, mat);
-	M3d_copy_mat(vi, mat_inverted);
+	if(vi != NULL){
+		M3d_copy_mat(vi, mat_inverted);
+	}
 };
+
+/* Some functions to work with vectors and matrices more easily */
+
+#include "vector.h"
+
+/**
+ * Translates the given matrix by the specified translation vector.
+ *
+ * @param matrix The matrix to be translated.
+ * @param translation The translation vector.
+ */
+void translate_matrix(double matrix[4][4], Vector3 translation){
+	double trans_mat[4][4];
+	M3d_make_translation(trans_mat, translation.x, translation.y, translation.z);
+	M3d_mat_mult(matrix, trans_mat, matrix);
+}
+
+/**
+ * @brief Scales a 4x4 matrix by the given scale vector.
+ * 
+ * This function multiplies each element of the matrix by the corresponding
+ * element of the scale vector, resulting in a scaled matrix.
+ * 
+ * @param matrix The 4x4 matrix to be scaled.
+ * @param scale The scale vector containing the scaling factors for each axis.
+ */
+void scale_matrix(double matrix[4][4], Vector3 scale){
+	double scale_mat[4][4];
+	M3d_make_scaling(scale_mat, scale.x, scale.y, scale.z);
+	M3d_mat_mult(matrix, scale_mat, matrix);
+}
