@@ -37,6 +37,10 @@ Vector3 vec3_add(Vector3 a, Vector3 b){
     return result;
 }
 
+Vector3 vec3_negated(Vector3 v){
+    return vec3_scale(v, -1);
+}
+
 Vector3 vec3_sub(Vector3 a, Vector3 b){
     Vector3 result;
     result.x = a.x - b.x;
@@ -79,6 +83,11 @@ Vector3 vec3_cross_prod(Vector3 a, Vector3 b){
     result.y = (a.x * b.z) - (b.x * a.z);
     result.z = (a.x * b.y) - (b.x * a.y);
     return result;
+}
+
+double* vec3_to_array(Vector3* vec){
+    //exists so that it's behaviour can be updated later
+    return (double*)vec;
 }
 
 /* 2D Vector Functions */

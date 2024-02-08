@@ -74,6 +74,14 @@ Vector3 vec3_add(Vector3 a, Vector3 b);
 Vector3 vec3_sub(Vector3 a, Vector3 b);
 
 /**
+ * Negates a Vector3 by changing the sign of each component.
+ *
+ * @param v The Vector3 to be negated.
+ * @return The negated Vector3.
+ */
+Vector3 vec3_negated(Vector3 v);
+
+/**
  * Multiplies two Vector3 objects element-wise.
  *
  * @param a The first Vector3 object.
@@ -116,6 +124,8 @@ double vec3_dot_prod(Vector3 a, Vector3 b);
  * @return The cross product of the two vectors.
  */
 Vector3 vec3_cross_prod(Vector3 a, Vector3 b);
+
+double* vec3_to_array(Vector3* vec);
 
 /**
  * @struct Vector2
