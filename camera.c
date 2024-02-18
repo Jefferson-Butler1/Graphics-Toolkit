@@ -47,16 +47,13 @@ void transform_camera(Camera* cam, double transform[4][4]){
 }
 
 void translate_camera(Camera* cam, Vector3 translation, enum TransformScope scope){
-    if(scope == LOCAL){
-        printf("Local transform not implemented\n");
-        return;
-    }
-    cam->eye = vec3_add(cam->eye, translation);
-    cam->coi = vec3_add(cam->coi, translation);
-    cam->up = vec3_add(cam->up, translation);
-
-    //Update the camera's view matrix
-    make_camera_view_matrix(cam->view_matrix, cam->inverse_view_matrix, *cam);
+    double transform[4][4] = IDENTITY_INITIALIZER;
+    if(scope == LOCAL) M3d_mat_mult(transform, cam->view_matrix, transform);
+    double trans_mat[4][4];
+    M3d_make_translation(trans_mat, translation.x, translation.y, translation.z);
+    M3d_mat_mult(transform, trans_mat, transform);
+    if(scope == LOCAL) M3d_mat_mult(transform, cam->inverse_view_matrix, transform);
+    transform_camera(cam, transform);
 }
 //TODO: Make these rotations along the local axis (optionally)
 void rotate_camera_x_degrees(Camera* cam, double x_degrees, enum TransformScope scope){
