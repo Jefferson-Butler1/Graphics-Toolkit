@@ -2,6 +2,7 @@
 #define CAMERA_H
 
 #include "vector.h"
+#include "scope.h"
 #include <stdbool.h>
 
 typedef struct Camera {
@@ -11,7 +12,11 @@ typedef struct Camera {
     double half_fov_degrees;
     double near_clip_plane;
     double far_clip_plane;
+    double view_matrix[4][4];
+    double inverse_view_matrix[4][4];
 } Camera;
+
+
 
 /**
  * Calculates the view matrix and its inverted form for a given camera.
