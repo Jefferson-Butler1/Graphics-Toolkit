@@ -1,7 +1,21 @@
 #include "vector.h"
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
+const Vector3 VEC3_ZERO    = {0, 0, 0};
+const Vector3 VEC3_FORWARD = {0, 0, 1};
+const Vector3 VEC3_BACK    = {0, 0, -1};
+const Vector3 VEC3_UP      = {0, 1, 0};
+const Vector3 VEC3_DOWN    = {0, -1, 0};
+const Vector3 VEC3_LEFT    = {-1, 0, 0};
+const Vector3 VEC3_RIGHT   = {1, 0, 0};
+
+const Vector2 VEC2_ZERO = {0, 0};
+const Vector2 VEC2_UP = {0, 1};
+const Vector2 VEC2_DOWN = {0, -1};
+const Vector2 VEC2_LEFT = {-1, 0};
+const Vector2 VEC2_RIGHT = {1, 0};
 
 /* 3D Vector Functions */
 

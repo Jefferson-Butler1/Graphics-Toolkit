@@ -9,7 +9,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-
 /**
  * @struct Vector3
  * @brief Represents a 3D vector with x, y, and z components.
@@ -20,6 +19,7 @@ typedef struct Vector3 {
     double z;
 } Vector3;
 
+extern const Vector3 VEC3_ZERO, VEC3_FORWARD, VEC3_BACK, VEC3_UP, VEC3_DOWN, VEC3_LEFT, VEC3_RIGHT;
 /**
  * Prints the components of a Vector3.
  *
@@ -135,6 +135,8 @@ typedef struct Vector2 {
     double x; 
     double y; 
 } Vector2;
+
+extern const Vector2 VEC2_ZERO, VEC2_UP, VEC2_DOWN, VEC2_LEFT, VEC2_RIGHT;
 
 /**
  * Prints the components of a 2D vector.
