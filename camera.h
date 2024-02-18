@@ -60,6 +60,7 @@ Vector2 to_window_coordinates(Vector2 camera_point, double width, double height)
  *
  * @param cam A pointer to the camera to be translated
  * @param translation The translation vector.
+ * @param scope The coordinate system to rotate in (global or local)
  */
 void translate_camera(Camera* cam, Vector3 translation,  enum TransformScope scope);
 
@@ -68,6 +69,7 @@ void translate_camera(Camera* cam, Vector3 translation,  enum TransformScope sco
  * 
  * @param cam A pointer to the camera to be rotated
  * @param x_degrees Degrees to be rotated on the x axis
+ * @param scope The coordinate system to rotate in (global or local)
  */
 void rotate_camera_x_degrees(Camera* cam, double x_degrees,  enum TransformScope scope);
 
@@ -76,6 +78,7 @@ void rotate_camera_x_degrees(Camera* cam, double x_degrees,  enum TransformScope
  * 
  * @param cam A pointer to the camera to be rotated
  * @param x_degrees Degrees to be rotated on the y axis
+ * @param scope The coordinate system to rotate in (global or local)
  */
 void rotate_camera_y_degrees(Camera* cam, double y_degrees,  enum TransformScope scope);
 
@@ -84,6 +87,7 @@ void rotate_camera_y_degrees(Camera* cam, double y_degrees,  enum TransformScope
  * 
  * @param cam A pointer to the camera to be rotated
  * @param x_degrees Degrees to be rotated on the z axis
+ * @param scope The coordinate system to rotate in (global or local)
  */
 void rotate_camera_z_degrees(Camera* cam, double z_degrees,  enum TransformScope scope);
 

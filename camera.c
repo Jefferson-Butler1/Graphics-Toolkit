@@ -57,57 +57,51 @@ void translate_camera(Camera* cam, Vector3 translation, enum TransformScope scop
 }
 //TODO: Make these rotations along the local axis (optionally)
 void rotate_camera_x_degrees(Camera* cam, double x_degrees, enum TransformScope scope){
-    if(scope == LOCAL){
-        printf("Local transform not implemented\n");
-        return;
-    }
-    double rads = to_radians(x_degrees);
-    double translation[4][4];
-    double rotation[4][4];
+    double transform[4][4] = IDENTITY_INITIALIZER;
 
-    M3d_make_x_rotation_cs(rotation, cos(rads), sin(rads));
-    M3d_make_translation(translation, -cam->eye.x, -cam->eye.y, -cam->eye.z);
-    M3d_mat_mult(rotation, rotation, translation);
-    M3d_make_translation(translation, cam->eye.x, cam->eye.y, cam->eye.z);
-    M3d_mat_mult(rotation, translation, rotation);
+    if(scope == LOCAL) M3d_mat_mult(transform, cam->view_matrix, transform);
+    else M3d_make_translation(transform, -cam->eye.x, -cam->eye.y, -cam->eye.z);
+
+    double rads = to_radians(x_degrees);
+    double temp_mat[4][4];
+
+    M3d_make_x_rotation_cs(temp_mat, cos(rads), sin(rads));
+    M3d_mat_mult(transform, temp_mat, transform);
     
-    transform_camera(cam, rotation);
+    if(scope == LOCAL) M3d_mat_mult(transform, cam->inverse_view_matrix, transform);
+    transform_camera(cam, transform);
 }
 
 void rotate_camera_y_degrees(Camera* cam, double y_degrees, enum TransformScope scope){
-    if(scope == LOCAL){
-        printf("Local transform not implemented\n");
-        return;
-    }
-    double rads = to_radians(y_degrees);
-    double translation[4][4];
-    double rotation[4][4];
+    double transform[4][4] = IDENTITY_INITIALIZER;
 
-    M3d_make_y_rotation_cs(rotation, cos(rads), sin(rads));
-    M3d_make_translation(translation, -cam->eye.x, -cam->eye.y, -cam->eye.z);
-    M3d_mat_mult(rotation, rotation, translation);
-    M3d_make_translation(translation, cam->eye.x, cam->eye.y, cam->eye.z);
-    M3d_mat_mult(rotation, translation, rotation);
+    if(scope == LOCAL) M3d_mat_mult(transform, cam->view_matrix, transform);
+    else M3d_make_translation(transform, -cam->eye.x, -cam->eye.y, -cam->eye.z);
+
+    double rads = to_radians(y_degrees);
+    double temp_mat[4][4];
+
+    M3d_make_y_rotation_cs(temp_mat, cos(rads), sin(rads));
+    M3d_mat_mult(transform, temp_mat, transform);
     
-    transform_camera(cam, rotation);
+    if(scope == LOCAL) M3d_mat_mult(transform, cam->inverse_view_matrix, transform);
+    transform_camera(cam, transform);
 }
 
 void rotate_camera_z_degrees(Camera* cam, double z_degrees, enum TransformScope scope){
-    if(scope == LOCAL){
-        printf("Local transform not implemented\n");
-        return;
-    }
+    double transform[4][4] = IDENTITY_INITIALIZER;
+
+    if(scope == LOCAL) M3d_mat_mult(transform, cam->view_matrix, transform);
+    else M3d_make_translation(transform, -cam->eye.x, -cam->eye.y, -cam->eye.z);
+
     double rads = to_radians(z_degrees);
-    double translation[4][4];
-    double rotation[4][4];
+    double temp_mat[4][4];
 
-    M3d_make_z_rotation_cs(rotation, cos(rads), sin(rads));
-    M3d_make_translation(translation, -cam->eye.x, -cam->eye.y, -cam->eye.z);
-    M3d_mat_mult(rotation, rotation, translation);
-    M3d_make_translation(translation, cam->eye.x, cam->eye.y, cam->eye.z);
-    M3d_mat_mult(rotation, translation, rotation);
-
-    transform_camera(cam, rotation);
+    M3d_make_z_rotation_cs(temp_mat, cos(rads), sin(rads));
+    M3d_mat_mult(transform, temp_mat, transform);
+    
+    if(scope == LOCAL) M3d_mat_mult(transform, cam->inverse_view_matrix, transform);
+    transform_camera(cam, transform);
 }
 
 bool visible_to_camera(Camera cam, Vector3 point){
