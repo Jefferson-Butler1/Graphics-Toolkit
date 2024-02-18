@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "camera.h"
+#include "scope.h"
 #include "matrix.h"
 #include "vector.h"
 #include "trig.h"
@@ -20,6 +21,7 @@ Vector3 to_camera_space(Vector3 point, Camera cam){
     return point;
 }
 
+//TODO: make this work for non square aspect ratios
 Vector2 to_camera_screen_space(Vector3 point, Camera cam){    
     Vector2 screen_point;
     double film_distance = 1 / tan(to_radians(cam.half_fov_degrees));
@@ -35,10 +37,74 @@ Vector2 to_window_coordinates(Vector2 point, double width, double height){
     return window_coord;
 }
 
-void translate_camera(Camera* cam, Vector3 translation){
+void transform_camera(Camera* cam, double transform[4][4]){
+    cam->eye = mat4_mult_point(cam->eye, transform);
+    cam->coi = mat4_mult_point(cam->coi, transform);
+    cam->up  = mat4_mult_point(cam->up, transform);
+}
+
+void translate_camera(Camera* cam, Vector3 translation, enum TransformScope scope){
+    if(scope == GLOBAL){
+        printf("Local transform not implemented\n");
+        return;
+    }
     cam->eye = vec3_add(cam->eye, translation);
     cam->coi = vec3_add(cam->coi, translation);
     cam->up = vec3_add(cam->up, translation);
+}
+//TODO: Make these rotations along the local axis(optionally)
+void rotate_camera_x_degrees(Camera* cam, double x_degrees, enum TransformScope scope){
+    if(scope == GLOBAL){
+        printf("Local transform not implemented\n");
+        return;
+    }
+    double rads = to_radians(x_degrees);
+    double translation[4][4];
+    double rotation[4][4];
+
+    M3d_make_x_rotation_cs(rotation, cos(rads), sin(rads));
+    M3d_make_translation(translation, -cam->eye.x, -cam->eye.y, -cam->eye.z);
+    M3d_mat_mult(rotation, rotation, translation);
+    M3d_make_translation(translation, cam->eye.x, cam->eye.y, cam->eye.z);
+    M3d_mat_mult(rotation, translation, rotation);
+    
+    transform_camera(cam, rotation);
+}
+
+void rotate_camera_y_degrees(Camera* cam, double y_degrees, enum TransformScope scope){
+    if(scope == GLOBAL){
+        printf("Local transform not implemented\n");
+        return;
+    }
+    double rads = to_radians(y_degrees);
+    double translation[4][4];
+    double rotation[4][4];
+
+    M3d_make_y_rotation_cs(rotation, cos(rads), sin(rads));
+    M3d_make_translation(translation, -cam->eye.x, -cam->eye.y, -cam->eye.z);
+    M3d_mat_mult(rotation, rotation, translation);
+    M3d_make_translation(translation, cam->eye.x, cam->eye.y, cam->eye.z);
+    M3d_mat_mult(rotation, translation, rotation);
+    
+    transform_camera(cam, rotation);
+}
+
+void rotate_camera_z_degrees(Camera* cam, double z_degrees, enum TransformScope scope){
+    if(scope == GLOBAL){
+        printf("Local transform not implemented\n");
+        return;
+    }
+    double rads = to_radians(z_degrees);
+    double translation[4][4];
+    double rotation[4][4];
+
+    M3d_make_z_rotation_cs(rotation, cos(rads), sin(rads));
+    M3d_make_translation(translation, -cam->eye.x, -cam->eye.y, -cam->eye.z);
+    M3d_mat_mult(rotation, rotation, translation);
+    M3d_make_translation(translation, cam->eye.x, cam->eye.y, cam->eye.z);
+    M3d_mat_mult(rotation, translation, rotation);
+
+    transform_camera(cam, rotation);
 }
 
 bool visible_to_camera(Camera cam, Vector3 point){

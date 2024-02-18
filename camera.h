@@ -53,18 +53,44 @@ Vector2 to_window_coordinates(Vector2 camera_point, double width, double height)
 /**
  * @brief Translates the camera by the specified translation vector.
  *
- * @param cam The camera to be translated.
+ * @param cam A pointer to the camera to be translated
  * @param translation The translation vector.
  */
-void translate_camera(Camera* cam, Vector3 translation);
+void translate_camera(Camera* cam, Vector3 translation,  enum TransformScope scope);
 
 /**
- * Determines if a canera space point is visible to the camera.
+ * @brief Rotates the camera on its origin around the x axis
+ * 
+ * @param cam A pointer to the camera to be rotated
+ * @param x_degrees Degrees to be rotated on the x axis
+ */
+void rotate_camera_x_degrees(Camera* cam, double x_degrees,  enum TransformScope scope);
+
+/**
+ * @brief Rotates the camera on its origin around the Y axis
+ * 
+ * @param cam A pointer to the camera to be rotated
+ * @param x_degrees Degrees to be rotated on the y axis
+ */
+void rotate_camera_y_degrees(Camera* cam, double y_degrees,  enum TransformScope scope);
+
+/**
+ * @brief Rotates the camera on its origin around the Z axis
+ * 
+ * @param cam A pointer to the camera to be rotated
+ * @param x_degrees Degrees to be rotated on the z axis
+ */
+void rotate_camera_z_degrees(Camera* cam, double z_degrees,  enum TransformScope scope);
+
+/**
+ * Determines if a camera space point is visible to the camera.
  *
  * @param cam The camera object.
  * @param point The point to check for visibility. It must be in camera space (view matrix already applied)
  * @return true if the point is visible to the camera, false otherwise.
  */
 bool visible_to_camera(Camera cam, Vector3 point);
+
+
 
 #endif
