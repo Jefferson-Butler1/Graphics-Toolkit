@@ -44,7 +44,7 @@ void transform_camera(Camera* cam, double transform[4][4]){
 }
 
 void translate_camera(Camera* cam, Vector3 translation, enum TransformScope scope){
-    if(scope == GLOBAL){
+    if(scope == LOCAL){
         printf("Local transform not implemented\n");
         return;
     }
@@ -54,7 +54,7 @@ void translate_camera(Camera* cam, Vector3 translation, enum TransformScope scop
 }
 //TODO: Make these rotations along the local axis(optionally)
 void rotate_camera_x_degrees(Camera* cam, double x_degrees, enum TransformScope scope){
-    if(scope == GLOBAL){
+    if(scope == LOCAL){
         printf("Local transform not implemented\n");
         return;
     }
@@ -72,7 +72,7 @@ void rotate_camera_x_degrees(Camera* cam, double x_degrees, enum TransformScope 
 }
 
 void rotate_camera_y_degrees(Camera* cam, double y_degrees, enum TransformScope scope){
-    if(scope == GLOBAL){
+    if(scope == LOCAL){
         printf("Local transform not implemented\n");
         return;
     }
@@ -90,7 +90,7 @@ void rotate_camera_y_degrees(Camera* cam, double y_degrees, enum TransformScope 
 }
 
 void rotate_camera_z_degrees(Camera* cam, double z_degrees, enum TransformScope scope){
-    if(scope == GLOBAL){
+    if(scope == LOCAL){
         printf("Local transform not implemented\n");
         return;
     }
