@@ -24,7 +24,7 @@ void vec3_print(Vector3 v){
 }
 
 double vec3_magnitude(Vector3 v){
-    return sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2));
+    return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
 void vec3_normalize(Vector3 *v){
@@ -111,7 +111,7 @@ void vec2_print(Vector2 v){
 }
 
 double vec2_magnitude(Vector2 v){
-    return sqrt(pow(v.x, 2) + pow(v.y, 2));
+    return sqrt(v.x * v.x + v.y * v.y);
 }
 
 void vec2_normalize(Vector2 *v){
