@@ -12,6 +12,13 @@ typedef struct PhongLight {
     Vector3 specular;
 } PhongLight;
 
+typedef struct PhongMaterial {
+    Vector3 base_color;
+    Vector3 diffuse;
+    Vector3 specular;
+    double shininess;
+} PhongMaterial;
+
 /**
  * @brief Calculates the lighting of a given point based on the Phong lightmodel
  * 
@@ -22,6 +29,6 @@ typedef struct PhongLight {
  * @param num_lights The number of PhongLights in the array
  * @return Vector3 The color of the point based on the phonglighting
  */
-Vector3 phong_lighting(Vector3 position, Vector3 normal, Camera cam, PhongLight* lights, int num_lights);
+Vector3 phong_lighting(Vector3 position, Vector3 normal, Camera cam, PhongMaterial material, PhongLight* lights, int num_lights);
 
 #endif
