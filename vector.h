@@ -8,6 +8,7 @@
 
 #ifndef VECTOR_H
 #define VECTOR_H
+#include <stdbool.h>
 
 /**
  * @struct Vector3
@@ -26,6 +27,16 @@ extern const Vector3 VEC3_ZERO, VEC3_FORWARD, VEC3_BACK, VEC3_UP, VEC3_DOWN, VEC
  * @param v The Vector3 to be printed.
  */
 void vec3_print(Vector3 v);
+
+/**
+ * @brief Checks two vectors for equality
+ * 
+ * @param a The first vector
+ * @param b The second vector
+ * @return true If the vectors are equal
+ * @return false If the vevtors are inequal
+ */
+bool vec3_is_equal(Vector3 a, Vector3 b);
 
 /**
  * Calculates the magnitude of a 3D vector.

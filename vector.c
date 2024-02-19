@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 const Vector3 VEC3_ZERO    = {0, 0, 0};
 const Vector3 VEC3_FORWARD = {0, 0, 1};
@@ -21,6 +22,10 @@ const Vector2 VEC2_RIGHT = {1, 0};
 
 void vec3_print(Vector3 v){
     printf("<%lf, %lf, %lf>\n", v.x, v.y, v.z);
+}
+
+bool vec3_is_equal(Vector3 a, Vector3 b){
+    return a.x == b.x && a.y == b.y && a.z == b.z;
 }
 
 double vec3_magnitude(Vector3 v){
