@@ -88,13 +88,13 @@ Vector3 vec3_scale(Vector3 v, double scale){
 }
 
 double vec3_dot_prod(Vector3 a, Vector3 b){
-    return (a.x * b.x) + (a.y * b.y) + (a.z + b.z);
+    return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
 }
 
 Vector3 vec3_cross_prod(Vector3 a, Vector3 b){
     Vector3 result;
     result.x = (a.y * b.z) - (b.y * a.z);
-    result.y = (a.x * b.z) - (b.x * a.z);
+    result.y = (a.z * b.x) - (b.z * a.x);
     result.z = (a.x * b.y) - (b.x * a.y);
     return result;
 }
