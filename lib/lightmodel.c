@@ -5,7 +5,6 @@
 #include "vector.h"
 
 const double AMBIENT = 0.2;
-const double SPECULAR_POWER = 64;
 
 //TODO: allow the object color to be passed in
 Vector3 phong_lighting(Vector3 position, Vector3 normal, Camera cam, PhongMaterial material, PhongLight* lights, int num_lights){

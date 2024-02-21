@@ -16,8 +16,6 @@ typedef struct Camera {
     double inverse_view_matrix[4][4];
 } Camera;
 
-
-
 /**
  * Calculates the view matrix and its inverted form for a given camera.
  *
@@ -54,6 +52,18 @@ Vector2 to_camera_screen_space(Vector3 point, Camera cam);
  */
 Vector2 to_window_coordinates(Vector2 camera_point, double width, double height);
 
+/**
+ * @brief Transforms a point from global space to screen space pixel coordinates
+ * 
+ * @param out A Vector2 that will be set to the pixel coordinates of the point
+ * @param global_point The point in global space
+ * @param cam The camera used for the transformation
+ * @param screen_width The width of the screen in pixels
+ * @param screen_height The height of the screen in pixels
+ * @return true if the point is visible to the camera
+ * @return false if the point is not visible to the camera
+ */
+bool point_to_window(Vector2* out, Vector3 global_point, Camera cam, double screen_width, double screen_height);
 
 /**
  * @brief Translates the camera by the specified translation vector.
@@ -98,7 +108,7 @@ void rotate_camera_z_degrees(Camera* cam, double z_degrees,  enum TransformScope
  * @param point The point to check for visibility. It must be in camera space (view matrix already applied)
  * @return true if the point is visible to the camera, false otherwise.
  */
-bool visible_to_camera(Camera cam, Vector3 point);
+bool is_visible_to_camera(Camera cam, Vector3 point);
 
 
 
