@@ -15,6 +15,9 @@ typedef struct PhongLight {
     Vector3 specular;
 } PhongLight;
 
+/**
+ * @brief A structure representing a material to be used with the Phong lightmodel
+ */
 typedef struct PhongMaterial {
     Vector3 base_color;
     Vector3 diffuse;
