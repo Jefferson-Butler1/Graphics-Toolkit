@@ -43,4 +43,43 @@ typedef struct {
  */
 void draw_parametric_object_3d(ParametricObject3D object, Camera cam, PhongLight* lights, int num_lights, int width, int height, double z_buffer[width][height], enum ViewMode mode);
 
+
+/**
+ * @brief Parametric function for a sphere
+ * 
+ * @param u The u parameter (0 to 2π for full sphere)
+ * @param v The v parameter (0 to π for full sphere)
+ * @return Vector3 The resulting point on the sphere
+ */
+Vector3 param_sphere(double u, double v);
+
+/**
+ * @brief Parametric function for a plane
+ * 
+ * 
+ * @param u The u parameter
+ * @param v The v parameter
+ * @return Vector3 The resulting point on the plane
+ * 
+ */
+Vector3 param_plane(double u, double v);
+
+/**
+ * @brief Parametric function for a plane
+ * 
+ * @param u The u parameter (0 to 2π for full cylinder)
+ * @param v The v parameter
+ * @return Vector3 The resulting point on the cylinder
+ */
+Vector3 cylinder(double u, double v);
+
+/**
+ * @brief Parametric function for a torus
+ * 
+ * @param u The u parameter (0 to 2π for full torus)
+ * @param v The v parameter (0 to 2π for full torus)
+ * @return Vector3 
+ */
+Vector3 param_torus(double u, double v);
+
 #endif

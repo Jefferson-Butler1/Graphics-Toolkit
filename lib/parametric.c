@@ -1,22 +1,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <math.h>
 #include "parametric.h"
 #include "matrix.h"
 #include "camera.h"
 #include "lightmodel.h"
 #include "FPToolkit.h"
 
-static int WIDTH;
-static int HEIGHT;
 
 double NORMAL_DELTA = 0.001;
 
-void init_window(int width, int height){
-    WIDTH = width;
-    HEIGHT = height;
-    G_init_graphics(width, height);
-}
 
 void draw_parametric_object_3d(ParametricObject3D object,
                             Camera cam,
@@ -61,4 +55,37 @@ void draw_parametric_object_3d(ParametricObject3D object,
             G_pixel(pixel_location.x, pixel_location.y);
         }
     }
+}
+
+Vector3 param_sphere(double u, double v){
+    Vector3 result;
+    result.x = cos(u) * sin(v);
+    result.y = sin(u) * sin(v);
+    result.z = cos(v);
+    return result;
+}
+
+Vector3 param_plane(double u, double v){
+    Vector3 result = {u, 0, v};
+    return result;
+}
+
+Vector3 cylinder(double u, double v){
+    Vector3 result; 
+    result.x = cos(u);
+    result.y = sin(-u);
+    result.z = v;
+    return result;
+}
+
+double TORUS_MINOR_RADIUS = 0.3;
+double TORUS_MAJOR_RADIUS = 1;
+
+//TODO: we need some way to be able to specify the major and minor radius here. Hm
+Vector3 param_torus(double u, double v){
+    Vector3 result;
+    result.x = (TORUS_MAJOR_RADIUS + TORUS_MINOR_RADIUS * cos(u)) * cos(v);
+    result.y = (TORUS_MAJOR_RADIUS + TORUS_MINOR_RADIUS * cos(u)) * sin(v);
+    result.z = TORUS_MINOR_RADIUS * sin(u);
+    return result;
 }
