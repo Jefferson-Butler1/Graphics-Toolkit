@@ -1,5 +1,4 @@
 // VERSION 104
-
 /*
     FPToolkit.c : A simple set of graphical tools.
     Copyright (C) 2018  Ely
