@@ -57,6 +57,22 @@ void draw_parametric_object_3d(ParametricObject3D object,
     }
 }
 
+void draw_parametric_objects_3d(ParametricObject3D* objects,
+                                int num_objs,
+                                Camera cam,
+                                PhongLight* lights,
+                                int num_lights,
+                                int width,
+                                int height,
+                                double z_buffer[width][height],
+                                enum ViewMode mode)
+{
+    for(int o = 0; o < num_objs; o++){
+        draw_parametric_object_3d(objects[o], cam, lights, num_lights, width, height, z_buffer, mode);
+    }
+}
+
+
 Vector3 param_sphere(double u, double v){
     Vector3 result;
     result.x = cos(u) * sin(v);
