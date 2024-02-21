@@ -7,15 +7,23 @@ int G_init_graphics(double width, double height);
 
 int G_wait_key();
 
+int G_no_wait_key();
+
 extern int (*G_rgb)(double r, double g, double b);
 
 extern int (*G_pixel)(double x, double y);
+
+extern int (*G_line)(double start_x, double start_y, double end_x, double end_y);
 
 extern int (*G_display_image)();
 
 extern int (*G_clear)();
 
+extern int (*G_circle)(double x, double y, double radius);
+
 extern int (*G_fill_circle)(double x, double y, double radius);
+
+
 /**
 int G_init_graphics(double width, double height);
 
