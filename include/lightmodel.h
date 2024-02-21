@@ -6,6 +6,9 @@
 
 extern const double AMBIENT, SPECULAR_POWER;
 
+/**
+ * @brief A structure representing a point light for use with the Phong lightmodel
+ */
 typedef struct PhongLight {
     Vector3 position;
     Vector3 diffuse;
