@@ -5,8 +5,8 @@
  * @version 0.1
  * @date 2024-02-19
  */
-#ifndef SCENE_H
-#define SCENE_H
+#ifndef PARAMETRIC_H
+#define PARAMETRIC_H
 
 #include "FPToolkit.h"
 #include "vector.h"
@@ -33,14 +33,6 @@ typedef struct {
 } ParametricObject3D;
 
 /**
- * @brief Creates a window with the specified width and height, and initializes the z-buffer
- * 
- * @param width The desired width of the window
- * @param height The desired height of the window
- */
-// void init_window(int width, int height);
-
-/**
  * @brief Draws a parametric 3D object in the scene
  * 
  * @param object The Parametric object to draw
@@ -49,22 +41,6 @@ typedef struct {
  * @param num_lights The number of lights
  * @param mode the view mode to draw the objects in
  */
-void draw_parametric_object3D(ParametricObject3D object, Camera cam, PhongLight* lights, int num_lights,int width, int height, double z_buffer[width][height], enum ViewMode mode);
-
-/**
- * @brief Draws a gizmo to dispaly point lights in the scene
- * 
- * @param light The light to draw
- */
-void draw_light(PhongLight light, Camera cam);
-
-/**
- * @brief Clears the screen and resets the z-buffer
- * 
- * @param background_color The background color to set when the screen is cleared
- */
-// void clear_frame(Vector3 background_color, int width, int height, double z_buffer[width][height]);
-
-// char wait_key();
+void draw_parametric_object_3d(ParametricObject3D object, Camera cam, PhongLight* lights, int num_lights, int width, int height, double z_buffer[width][height], enum ViewMode mode);
 
 #endif
