@@ -37,9 +37,12 @@ Vector3 phong_lighting(Vector3 position, Vector3 normal, Camera cam, PhongMateri
 //* because G_pixel is not safe (according to FPToolkit comments), this function can cause undefined behaviour 
 //* if the lines that are drawn happen to go outside the window. This ca happen if the light is near the edge of the screen.
 void draw_light(PhongLight light, Camera cam, int width, int height){
-    Vector3 position = to_camera_space(light.position, cam);
-    if(!is_visible_to_camera(cam, position)) return;
-    Vector2 pixel_coords = to_window_coordinates(to_camera_screen_space(position, cam), width, height);
+    Vector2 pixel_coords;
+    bool visible = point_to_window(&pixel_coords, light.position, cam, width, height);
+    if(!visible) return;
+    // Vector3 position = to_camera_space(light.position, cam);
+    // if(!is_visible_to_camera(cam, position)) return;
+    // Vector2 pixel_coords = to_window_coordinates(to_camera_screen_space(position, cam), width, height);
     G_rgb(light.diffuse.x, light.diffuse.y, light.diffuse.z);
     G_fill_circle(pixel_coords.x, pixel_coords.y, LIGHT_GIZMO_RADIUS);
     
