@@ -31,4 +31,24 @@ typedef struct PhongMaterial {
  */
 Vector3 phong_lighting(Vector3 position, Vector3 normal, Camera cam, PhongMaterial material, PhongLight* lights, int num_lights);
 
+/**
+ * @brief Draws a gizmo to display point lights in the scene
+ * 
+ * @param light The light to draw
+ * @param cam The camera to draw the light from
+ * @param width The width of the window
+ * @param height The height of the window
+ */
+void draw_light(PhongLight light, Camera cam, int width, int height);
+
+/**
+ * @brief Draws multiple lights in the scene
+ * 
+ * @param lights An array of lights to draw
+ * @param cam The camera to draw the lights from
+ * @param width The width of the window
+ * @param height The height of the window
+ */
+void draw_lights(PhongLight* lights, int num_lights, Camera cam, int width, int height);
+
 #endif
