@@ -5,6 +5,11 @@
 #include "scope.h"
 #include <stdbool.h>
 
+/**
+ * @brief A struct representing a 3D camera. 
+ * 
+ * The camera's transform should not be modified directly. Instead use transform_camera, rotate_camera, translate_camera
+ */
 typedef struct Camera {
     Vector3 eye;
     Vector3 coi;
@@ -64,6 +69,14 @@ Vector2 to_window_coordinates(Vector2 camera_point, double width, double height)
  * @return false if the point is not visible to the camera
  */
 bool point_to_window(Vector2* out, Vector3 global_point, Camera cam, double screen_width, double screen_height);
+
+/**
+ * @brief Transforms the camera based on the provided transform matrix
+ * 
+ * @param cam A pointer to the Camera to be transformed
+ * @param transform The transform to apply to the camera
+ */
+void transform_camera(Camera* cam, double transform[4][4])
 
 /**
  * @brief Translates the camera by the specified translation vector.
