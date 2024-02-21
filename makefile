@@ -1,6 +1,5 @@
 CC=gcc
 CFLAGS=-I./include -g -I/opt/X11/include -O3
-LDFLAGS=
 SRC_DIR=lib
 OBJ_DIR=out
 INCLUDE_DIR=include
@@ -14,7 +13,7 @@ OBJS=$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 # Target to compile everything
 all: $(OBJS)
 
-# Rule to compile the C files into object files
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
