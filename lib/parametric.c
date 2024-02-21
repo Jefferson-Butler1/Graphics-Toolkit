@@ -36,7 +36,12 @@ void draw_parametric_object_3d(ParametricObject3D object,
 
             if(mode == UNLIT){
                 G_rgb(object.material.base_color.x, object.material.base_color.y, object.material.base_color.z);
-            } else if(mode == Z_BUFF){
+            } else if(mode == UV){
+                double u_range = object.u_end - object.u_start;
+                double v_range = object.v_end - object.v_start;
+                G_rgb(u / u_range, v / v_range, 0);
+            } 
+            else if(mode == Z_BUFF){
                 double brightness = z_buffer[(int)pixel_location.x][(int)pixel_location.y];
                 G_rgb(brightness, brightness, brightness);
             } else{

@@ -17,7 +17,8 @@ enum ViewMode {
     LIT,
     UNLIT,
     Z_BUFF,
-    NORMAL
+    NORMAL,
+    UV
 };
 
 typedef struct {
