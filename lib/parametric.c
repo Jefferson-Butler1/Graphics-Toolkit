@@ -8,6 +8,7 @@
 #include "lightmodel.h"
 #include "FPToolkit.h"
 
+static const bool BACKFACE_CULLING = false; //TODO: Make this an option that can be passed in
 
 double NORMAL_DELTA = 0.001;
 
@@ -22,6 +23,7 @@ void draw_parametric_object_3d(ParametricObject3D object,
 {
     for(double u = object.u_start; u < object.u_end; u += object.u_step){
         for(double v = object.v_start; v < object.v_end; v += object.v_step){
+
             Vector3 point = mat4_mult_point(object.f(u, v), object.transform);
 
             Vector3 camera_point = to_camera_space(point, cam);
@@ -29,6 +31,19 @@ void draw_parametric_object_3d(ParametricObject3D object,
             
             double normalized_z_dist = (camera_point.z - cam.near_clip_plane) / (cam.far_clip_plane - cam.near_clip_plane);
             Vector2 pixel_location = to_window_coordinates(to_camera_screen_space(camera_point, cam), width, height);
+            
+            if(BACKFACE_CULLING){ //TODO: Make this more optimized. View vector can be reused in phong lighting. The normal calculation should not be recomputed later if this is true
+                Vector3 tangent_a = vec3_normalized(vec3_sub(mat4_mult_point(object.f(u, v + NORMAL_DELTA), object.transform), point));
+                Vector3 tangent_b = vec3_normalized(vec3_sub(mat4_mult_point(object.f(u + NORMAL_DELTA, v), object.transform), point));
+                Vector3 normal = vec3_cross_prod(tangent_a, tangent_b);
+                Vector3 view_vec = vec3_normalized(vec3_sub(cam.eye, point));
+                if(vec3_dot_prod(normal, view_vec) < 0) {
+                    continue;
+                    G_rgb(1, 0, 0);
+                    goto draw;
+                } //cull if cant see
+
+            }
 
             if(normalized_z_dist >  z_buffer[(int)pixel_location.x][(int)pixel_location.y]) continue;
 
@@ -49,6 +64,7 @@ void draw_parametric_object_3d(ParametricObject3D object,
                 Vector3 tangent_a = vec3_normalized(vec3_sub(mat4_mult_point(object.f(u, v + NORMAL_DELTA), object.transform), point));
                 Vector3 tangent_b = vec3_normalized(vec3_sub(mat4_mult_point(object.f(u + NORMAL_DELTA, v), object.transform), point));
                 Vector3 normal = vec3_cross_prod(tangent_a, tangent_b);
+
                 if(mode == NORMAL){
                     G_rgb(normal.x, normal.y, normal.z);
                 } else if (mode == LIT){
@@ -56,7 +72,7 @@ void draw_parametric_object_3d(ParametricObject3D object,
                     G_rgb(col.x, col.y, col.z);
                 }
             }
-
+            draw:
             G_pixel(pixel_location.x, pixel_location.y);
         }
     }
