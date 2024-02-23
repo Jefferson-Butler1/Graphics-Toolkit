@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include "parametric.h"
+#include "vector.h"
 #include "matrix.h"
 #include "camera.h"
 #include "lightmodel.h"
@@ -23,9 +24,6 @@ void draw_parametric_object_3d(ParametricObject3D object,
 {
     for(double u = object.u_start; u < object.u_end; u += object.u_step){
         for(double v = object.v_start; v < object.v_end; v += object.v_step){
-            Vector3 tangent_a;
-            Vector3 tangent_b;
-            Vector3 normal;
 
             Vector3 point = mat4_mult_point(object.f(u, v), object.transform);
 
@@ -40,20 +38,21 @@ void draw_parametric_object_3d(ParametricObject3D object,
 
             z_buffer[(int)pixel_location.x][(int)pixel_location.y] = normalized_z_dist;
 
+            Vector3 tangent_a;
+            Vector3 tangent_b;
+            Vector3 normal;
             if(BACKFACE_CULLING){ //TODO: Make this more optimized. View vector can be reused in phong lighting.
                 tangent_a = vec3_normalized(vec3_sub(mat4_mult_point(object.f(u, v + NORMAL_DELTA), object.transform), point));
                 tangent_b = vec3_normalized(vec3_sub(mat4_mult_point(object.f(u + NORMAL_DELTA, v), object.transform), point));
                 normal = vec3_cross_prod(tangent_a, tangent_b);
                 Vector3 view_vec = vec3_normalized(vec3_sub(cam.eye, point));
                 if(vec3_dot_prod(normal, view_vec) < 0) {
-                    continue;
-                    // G_rgb(1, 0, 0);
-                    // goto draw;
-                } //cull if cant see
+                    continue; //cull if cant see
+                } 
 
             }
             if(mode == UNLIT){
-                G_rgb(object.material.base_color.x, object.material.base_color.y, object.material.base_color.z);
+                G_rgb(SPREAD_COL3(object.material.base_color));
             } else if(mode == UV){
                 double u_range = object.u_end - object.u_start;
                 double v_range = object.v_end - object.v_start;
@@ -71,14 +70,14 @@ void draw_parametric_object_3d(ParametricObject3D object,
                 }
 
                 if(mode == NORMAL){
-                    G_rgb(normal.x, normal.y, normal.z);
+                    G_rgb(SPREAD_COL3(normal));
                 } else if (mode == LIT){
-                    Vector3 col = phong_lighting(point, normal, cam, object.material, lights, num_lights);
-                    G_rgb(col.x, col.y, col.z);
+                    Color3 col = phong_lighting(point, normal, cam, object.material, lights, num_lights);
+                    G_rgb(SPREAD_COL3(col));
                 }
             }
             draw:
-            G_pixel(pixel_location.x, pixel_location.y);
+            G_pixel(SPREAD_VEC2(pixel_location));
         }
     }
 }
