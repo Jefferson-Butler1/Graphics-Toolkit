@@ -10,8 +10,9 @@
 #define VECTOR_H
 #include <stdbool.h>
 
-//This allows vectors to be used for FPToolkit args more easily
+//These allows vectors to be used for FPToolkit args more easily
 #define SPREAD_VEC3(v) (v).x, (v).y, (v).z
+#define SPREAD_VEC2(v) (v).x, (v).y
 
 /**
  * @struct Vector3
