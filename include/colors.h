@@ -6,6 +6,13 @@
  * @date 2024-01-23
  * 
  */
+#include "vector.h"
+
+/**
+ * @brief An alias for Vector3. Behaves the exact same but is more semantically meaningful
+ * 
+ */
+typedef Vector3 Color3;
 
 #ifndef COLORS_H
 #define COLORS_H
