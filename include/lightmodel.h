@@ -4,7 +4,7 @@
 #include "vector.h"
 #include "camera.h"
 
-extern const double AMBIENT, SPECULAR_POWER;
+extern const double AMBIENT;
 
 /**
  * @brief A structure representing a point light for use with the Phong lightmodel
