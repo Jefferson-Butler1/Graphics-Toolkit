@@ -2,6 +2,7 @@
 #define LIGHTMODEL_H
 
 #include "vector.h"
+#include "colors.h"
 #include "camera.h"
 
 extern const double AMBIENT;
@@ -11,17 +12,17 @@ extern const double AMBIENT;
  */
 typedef struct PhongLight {
     Vector3 position;
-    Vector3 diffuse;
-    Vector3 specular;
+    Color3 diffuse;
+    Color3 specular;
 } PhongLight;
 
 /**
  * @brief A structure representing a material to be used with the Phong lightmodel
  */
 typedef struct PhongMaterial {
-    Vector3 base_color;
-    Vector3 diffuse;
-    Vector3 specular;
+    Color3 base_color;
+    Color3 diffuse;
+    Color3 specular;
     double shininess;
 } PhongMaterial;
 
