@@ -8,6 +8,8 @@
 #include "camera.h"
 #include "lightmodel.h"
 #include "FPToolkit.h"
+#include "texture.h"
+#include "xwd_tools.h"
 
 static const bool BACKFACE_CULLING = false; //TODO: Make this an option that can be passed in?
 
@@ -50,6 +52,15 @@ void draw_parametric_object_3d(ParametricObject3D object,
                     continue; //cull if cant see
                 } 
 
+            }
+            //Apply texture
+            if(object.material.texture.id >= 0 && (mode == UNLIT || mode == LIT)){
+                double u_range = object.u_end - object.u_start;
+                double v_range = object.v_end - object.v_start;
+                Vector2 uv = {u / u_range * object.material.texture.width, v / v_range * object.material.texture.height};
+                Color3 tex_col = get_texture_color(object.material.texture, uv);
+                object.material.base_color = tex_col;
+                object.material.diffuse = tex_col;
             }
             if(mode == UNLIT){
                 G_rgb(SPREAD_COL3(object.material.base_color));
@@ -110,8 +121,8 @@ Vector3 param_plane(double u, double v){
     Vector3 result = {u, 0, v};
     return result;
 }
-
-Vector3 cylinder(double u, double v){
+    
+Vector3 param_cylinder(double u, double v){
     Vector3 result; 
     result.x = cos(u);
     result.y = sin(-u);
