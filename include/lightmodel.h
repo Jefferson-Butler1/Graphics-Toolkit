@@ -4,6 +4,7 @@
 #include "vector.h"
 #include "colors.h"
 #include "camera.h"
+#include "texture.h"
 
 extern const double AMBIENT;
 
@@ -24,6 +25,7 @@ typedef struct PhongMaterial {
     Color3 diffuse;
     Color3 specular;
     double shininess;
+    Texture texture;
 } PhongMaterial;
 
 /**
