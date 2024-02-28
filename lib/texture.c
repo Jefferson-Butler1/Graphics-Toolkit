@@ -4,6 +4,8 @@
 #include "texture.h"
 #include "xwd_tools.h"
 
+const Texture NULL_TEXTURE = {0, 0, 0, {-1}};
+
 Texture new_xwd_texture(char* filename){
     Texture result;
     result.type = XWD;
@@ -112,4 +114,8 @@ Texture new_png_texture(char* filename){
 
     png_destroy_read_struct(&png, &info, NULL);
     return result;
+}
+
+bool texture_is_null(Texture texture){
+    return (texture.width <= 0 || texture.height <= 0);
 }
