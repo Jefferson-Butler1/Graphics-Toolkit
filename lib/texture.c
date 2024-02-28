@@ -4,6 +4,8 @@
 #include "texture.h"
 #include "xwd_tools.h"
 
+const Texture NULL_TEXTURE = {0, 0, 0, {-1}};
+
 Texture new_xwd_texture(char* filename){
     Texture result;
     result.type = XWD;
@@ -55,6 +57,10 @@ Texture new_png_texture(char* filename){
     result.type = PNG;
     result.data.row_pointers = NULL;
     FILE *fp = fopen(filename, "rb");
+    if(fp == NULL){
+        fprintf(stderr, "Could not find file '%s'", filename);
+        exit(1);
+    }
     png_structp png = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
     if(!png){ 
         fprintf(stderr, "error loading png file\n");
@@ -112,4 +118,8 @@ Texture new_png_texture(char* filename){
 
     png_destroy_read_struct(&png, &info, NULL);
     return result;
+}
+
+bool texture_is_null(Texture texture){
+    return (texture.width <= 0 || texture.height <= 0);
 }

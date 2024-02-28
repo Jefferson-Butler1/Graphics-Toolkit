@@ -25,7 +25,10 @@ typedef struct PhongMaterial {
     Color3 diffuse;
     Color3 specular;
     double shininess;
-    Texture texture;
+    Texture texture_diffuse;
+    Texture texture_displacement;
+    double displacement_scale;
+    Texture texture_specular;
 } PhongMaterial;
 
 /**
