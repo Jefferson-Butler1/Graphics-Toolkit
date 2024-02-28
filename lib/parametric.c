@@ -54,7 +54,7 @@ void draw_parametric_object_3d(ParametricObject3D object,
 
             }
             //Apply texture
-            if(object.material.texture.id >= 0 && (mode == UNLIT || mode == LIT)){
+            if(object.material.texture.data.xwd_texture_id >= 0 && (mode == UNLIT || mode == LIT)){
                 double u_range = object.u_end - object.u_start;
                 double v_range = object.v_end - object.v_start;
                 Vector2 uv = {u / u_range * object.material.texture.width, v / v_range * object.material.texture.height};
