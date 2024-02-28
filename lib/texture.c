@@ -57,6 +57,10 @@ Texture new_png_texture(char* filename){
     result.type = PNG;
     result.data.row_pointers = NULL;
     FILE *fp = fopen(filename, "rb");
+    if(fp == NULL){
+        fprintf(stderr, "Could not find file '%s'", filename);
+        exit(1);
+    }
     png_structp png = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
     if(!png){ 
         fprintf(stderr, "error loading png file\n");
