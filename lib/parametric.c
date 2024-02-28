@@ -94,7 +94,15 @@ void draw_parametric_object_3d(ParametricObject3D object,
                 if(mode == NORMAL){
                     G_rgb(SPREAD_COL3(normal));
                 } else if (mode == LIT){
+                    // Hacky specular modification so I don't have to mess with `phong_lighting`
+                    Color3 base_specular = object.material.specular;
+                    if(!texture_is_null(object.material.texture_specular)){
+                        Vector2 uv = {u / u_range * object.material.texture_specular.width, v / v_range * object.material.texture_specular.height};
+                        double spec_value = get_texture_color(object.material.texture_specular, uv).r; // Just use red channel
+                        object.material.specular = vec3_scale(base_specular, spec_value);
+                    }
                     Color3 col = phong_lighting(point, normal, cam, object.material, lights, num_lights);
+                    object.material.specular = base_specular;
                     G_rgb(SPREAD_COL3(col));
                 }
             }

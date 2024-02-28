@@ -28,6 +28,7 @@ typedef struct PhongMaterial {
     Texture texture_diffuse;
     Texture texture_displacement;
     double displacement_scale;
+    Texture texture_specular;
 } PhongMaterial;
 
 /**
