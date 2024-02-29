@@ -148,4 +148,20 @@ void M3d_make_movement_sequence_matrix(double out[4][4], double out_inverted[4][
 
 void M3d_view(double v[4][4], double vi[4][4],  double eyeA[3], double coiA[3], double upA[3]);
 
+#define SX 0
+#define SY 1
+#define SZ 2
+
+#define RX 3
+#define RY 4
+#define RZ 5
+
+#define TX 6
+#define TY 7
+#define TZ 8
+
+#define NX 9
+#define NY 10
+#define NZ 11
+
 #endif

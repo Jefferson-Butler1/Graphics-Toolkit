@@ -11,6 +11,8 @@
 #include "texture.h"
 #include "xwd_tools.h"
 
+
+
 static const bool BACKFACE_CULLING = false; //TODO: Make this an option that can be passed in?
 
 double NORMAL_DELTA = 0.001;
