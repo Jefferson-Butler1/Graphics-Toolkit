@@ -30,6 +30,7 @@ typedef struct {
     double v_end;
     double v_step;
     double transform[4][4];
+    double transformI[4][4];
     PhongMaterial material;
 } ParametricObject3D;
 

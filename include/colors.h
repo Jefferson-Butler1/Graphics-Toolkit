@@ -31,4 +31,8 @@ typedef Vector3 Color3;
 #define MAGENTA 1, 0, 1
 #define CYAN 0, 1, 1
 
+#define color(r, g, b) (Color3){r, g, b}
+
+#define setColor(c) G_rgb(SPREAD_COL3(c))
+
 #endif
