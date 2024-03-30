@@ -32,6 +32,7 @@ double quadratic_solve(double a, double b, double c) {
     return 0;
 }
 
+
 Color3 ray(Vector3 Rsource, Vector3 Rtip, ParametricObject3D objects[], int num_objects){
 
   ParametricObject3D obj;

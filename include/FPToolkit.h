@@ -31,6 +31,10 @@ extern int (*G_draw_string)(const void *text, double x, double y);
 
 extern int (* G_save_image_to_file) (const void *filename) ;
 
+// Waits for and returns a mouse click.
+extern int (*G_wait_mouse) () ;
+
+
 
 /**
 int G_init_graphics(double width, double height);
@@ -44,8 +48,6 @@ int (*G_clear)(void);
 // Displays the current image.
 int G_display_image(void);
 
-// Waits for and returns a mouse click.
-int (*G_wait_click)(double p[2]);
 
 // Waits for and returns a key press.
 int (*G_wait_key)(void);

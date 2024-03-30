@@ -153,10 +153,17 @@ double* vec3_to_array(Vector3* vec);
  * @struct Vector2
  * @brief Represents a 2D vector with x and y components.
  */
-typedef struct Vector2 {
-    double x; 
-    double y; 
+typedef union Vector2 {
+    struct{
+        double x;
+        double y;
+    };
+    struct  {
+        double first;
+        double second;
+    } ;
 } Vector2;
+
 
 extern const Vector2 VEC2_ZERO, VEC2_UP, VEC2_DOWN, VEC2_LEFT, VEC2_RIGHT;
 
